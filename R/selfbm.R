@@ -25,7 +25,7 @@
 #' @export
 #'
 #' @examples
-selfbm <- function(call, ..., engine = c("microbenchmark", "bench")){
+selfbm <- function(call, ..., engine = c("microbenchmark", "bench","rbenchmark")){
   engine <- match.arg(engine)
   call <- substitute(call)
   fun <- call[[1]]
@@ -40,7 +40,8 @@ selfbm <- function(call, ..., engine = c("microbenchmark", "bench")){
   engine <- switch(
     engine,
     microbenchmark = quote(microbenchmark::microbenchmark),
-    bench = quote(bench::mark))
+    bench = quote(bench::mark),
+    rbenchmark = quote(rbenchmark::benchmark))
   call <- as.call(c(
     engine,
     setNames(c(call1,call2), c(nm1,nm2)),

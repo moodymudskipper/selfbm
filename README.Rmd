@@ -55,9 +55,10 @@ But when we use *selfbm* the call is parsed and alternatives are compared:
 selfbm(split_chars("ab"))
 ```
 
-Two benchmarking pakages are supported, *microbenchmark* (the default), and
-*bench*.
+Several benchmarking packages are supported, *microbenchmark* (the default),
+*bench*, and *rbenchmark*.
 
 ```{r}
 selfbm(split_chars("ab"), engine = "bench")
+selfbm(split_chars("ab"), engine = "rbenchmark", replications = 10000)
 ```

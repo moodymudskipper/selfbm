@@ -52,22 +52,29 @@ compared:
 selfbm(split_chars("ab"))
 #> Unit: nanoseconds
 #>                                        expr  min   lq  mean median   uq
-#>  res <- c(substr(x, 1, 1), substr(x, 2, 2)) 1600 1600 20919   1700 1800
-#>                 res <- strsplit(x, "")[[1]]  800  900 11740    900 1000
+#>  res <- c(substr(x, 1, 1), substr(x, 2, 2)) 1600 1600 16386   1700 1800
+#>                 res <- strsplit(x, "")[[1]]  800  900 15165    900 1000
 #>      max neval cld
-#>  1905800   100   a
-#>  1075100   100   a
+#>  1447700   100   a
+#>  1402500   100   a
 ```
 
-Two benchmarking pakages are supported, *microbenchmark* (the default),
-and *bench*.
+Several benchmarking packages are supported, *microbenchmark* (the
+default), *bench*, and *rbenchmark*.
 
 ``` r
 selfbm(split_chars("ab"), engine = "bench")
 #> # A tibble: 2 x 6
 #>   expression                                   min median `itr/sec`
 #>   <bch:expr>                                 <bch> <bch:>     <dbl>
-#> 1 res <- c(substr(x, 1, 1), substr(x, 2, 2))   2us  2.4us   262533.
-#> 2 res <- strsplit(x, "")[[1]]                1.1us  1.3us   635017.
+#> 1 res <- c(substr(x, 1, 1), substr(x, 2, 2))   2us  2.4us   323975.
+#> 2 res <- strsplit(x, "")[[1]]                1.1us  1.3us   657929.
 #> # ... with 2 more variables: mem_alloc <bch:byt>, `gc/sec` <dbl>
+selfbm(split_chars("ab"), engine = "rbenchmark", replications = 10000)
+#>                                         test replications elapsed relative
+#> 1 res <- c(substr(x, 1, 1), substr(x, 2, 2))        10000    0.05        5
+#> 2                res <- strsplit(x, "")[[1]]        10000    0.01        1
+#>   user.self sys.self user.child sys.child
+#> 1      0.05        0         NA        NA
+#> 2      0.01        0         NA        NA
 ```

@@ -4,7 +4,7 @@
 \alias{selfbm}
 \title{Benchmark a function against itself}
 \usage{
-selfbm(call, ..., engine = c("microbenchmark", "bench"))
+selfbm(call, ..., engine = c("microbenchmark", "bench", "rbenchmark"))
 }
 \arguments{
 \item{call}{a function call}
