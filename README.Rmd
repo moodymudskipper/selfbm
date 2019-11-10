@@ -33,7 +33,7 @@ Define a function, and provide alternate statement for a call:
 
 ```{r example}
 library(selfbm)
-split2_chars <- function(x){
+split_chars <- function(x){
   # some code
   # ...
   res <- c(substr(x,1,1), substr(x,2,2)) ? res <- strsplit(x,"")[[1]]
@@ -46,18 +46,18 @@ split2_chars <- function(x){
 The function still works when called normally, using the left hand side call:
 
 ```{r cars}
-split2_chars("ab")
+split_chars("ab")
 ```
 
 But when we use *selfbm* the call is parsed and alternatives are compared:
 
 ```{r}
-selfbm(split2_chars("ab"))
+selfbm(split_chars("ab"))
 ```
 
 Two benchmarking pakages are supported, *microbenchmark* (the default), and
 *bench*.
 
 ```{r}
-selfbm(split2_chars("ab"), engine = "bench")
+selfbm(split_chars("ab"), engine = "bench")
 ```
